@@ -1,0 +1,188 @@
+.santa {
+
+    @include size(40%);
+    background: rgb(246,230,180);
+    background: radial-gradient(circle, rgba(246,230,180,1) 40%, rgba(234,171,93,1) 100%);  
+    margin: 30% auto;
+    border-radius: 30% 30% 90% 90%;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        .eyes::after {
+            height: 5%;
+            margin-top: 5%;
+            transform: rotate(-8deg);
+        }
+
+        .santa__mustache {
+            animation: wiggle .6s infinite;
+        }
+
+        .hat__main {
+
+            &::after {
+                animation: pompon .2s .5s 3;
+            }
+
+            &::before {
+                animation: hat .2s .5s 3;
+            }
+        }
+    }
+
+    &__beard {
+        @include size(110%, 80%);
+        @include pos($t: 50%, $l:-5%);
+        background: rgb(255,255,255);
+        background: radial-gradient(at top, rgba(255,255,255,1) 0%, rgba(228,228,228,1) 100%);
+        border-radius: 30% 30% 110% 110%;
+
+    }
+
+    &__mustache {
+        @include size(70%, 25%);
+        @include pos($t:-10%, $l: 15%);
+
+        &::before, &::after {
+            content: '';
+            @include size(50%,100%);
+            @include pos($t:0);
+        }
+
+        &::before {
+            left: 0;
+            border-radius: 200% 40% 100%;
+            background: rgb(228,228,228);
+            background: radial-gradient(at top left, $white 0%, rgba(255,255,255,1) 100%);
+            box-shadow: -2px 6px 8px 0 #e4e4e4;
+        }
+
+        &::after {
+            right: 0;
+            border-radius: 40% 200% 40% 100%;
+            background-color: green;
+            background: rgb(228,228,228);
+            background: radial-gradient(at top right, $white 0%, rgba(255,255,255,1) 100%);
+            box-shadow: 2px 6px 8px 0 #e4e4e4;
+        }
+    }
+
+}
+
+.eyes {
+        &::before, &::after {
+            content: '';
+            @include size(15%);
+            background-color: #000;
+            @include pos($t: 20%);
+            border-radius: 100%;
+            transition: all .3s;
+
+        }
+
+
+        &::before {
+            left: 20%;
+        }
+
+        &::after {
+            right: 20%;
+        }
+}
+
+.hat {
+    @include size(100%, 50%);
+    @include pos($t:-45%);
+
+
+    &__main {
+        @include size(100%);
+        background-color: $red;
+        border-radius: 100% 100% 0 0;
+        transform: skew(0, -8deg);
+
+        position: relative;
+
+        &::before {
+            @include size(0);
+            @include pos($t:50%, $r: -17%);
+            content: '';
+
+            border-width: 30px 0 0 20px;
+            border-color: transparent transparent transparent $red;
+            border-style: solid;
+            // clip-path: polygon(0 0, 0% 100%, 100% 100%);
+            // background-color: $red;
+            transform: skew(0, 30deg);
+
+
+        }
+
+        &::after {
+            @include size(25%, 48%);
+            @include pos($b: -45%, $r:-30%);
+
+            content: '';
+            background: rgb(255,255,255);
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(228,228,228,1) 100%); border-radius: 50%;
+            transform: skew(0, 10deg);
+            box-shadow: inset 2px 6px 8px 0 #e4e4e4;
+        }
+    }
+
+
+
+    &__bottom {
+        @include size(110%, 35%);
+        @include pos($b: -15%, $l: -5%);
+        background: rgb(255,255,255);
+        background: radial-gradient(at top, rgba(255,255,255,1) 0%, rgba(228,228,228,1) 100%);
+        border-radius: 30% 30% 110% 110%;
+        border-radius: 50px;
+
+
+    }
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(0turn);
+    }
+    25% {
+        transform: rotate(.01turn) scale(1.1);
+    }
+    50%{
+        transform: rotate(-0.01turn) scale(1.1);
+    }
+    75%{
+        transform: rotate(.01turn) scale(1.1);
+    }
+    100% {
+        transform: rotate(0turn) scale(1);
+    }
+}
+
+@keyframes pompon {
+    25% {
+        right: -26%;
+        bottom: -49%;
+    }
+
+    75% {
+        right: -32%;
+        bottom: -41%;
+    }
+}
+
+@keyframes hat {
+    25% {
+        transform: skew(0, 41deg);
+        right: -16%;
+    }
+
+    75% {
+        transform: skew(0, 26deg);
+        right: -17%;
+    }
+}
